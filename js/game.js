@@ -13,8 +13,37 @@ fg.src = 'img/fg.png'
 pipeUp.src = 'img/pipeUp.png'
 pipeBottom.src = 'img/pipeBottom.png'
 
+const pipe = []
+pipe[0] = {
+  x: cvs.width,
+  y: 0
+}
+
+const gap = 90
+let gravitation = 1
+let xPos = 10
+let yPos = 150
+
+document.addEventListener('keydown', moveUp)
+
+function moveUp() {
+  yPos -= 20
+}
+
 function draw() {
+
   ctx.drawImage(bg, 0, 0)
+
+  for (let i = 0; i < pipe.length; i++) {
+    ctx.drawImage(pipeUp, pipe[i].x, pipe[i].y)
+    ctx.drawImage(pipeBottom, pipe[i].x, pipe[i].y + pipeUp.height + gap)
+    pipe[i].x--
+  }
+
+  ctx.drawImage(fg, 0, cvs.height - fg.height)
+  ctx.drawImage(bird, xPos, yPos)
+  yPos += gravitation
+  requestAnimationFrame(draw)
 }
 
 pipeBottom.onload = draw
