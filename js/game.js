@@ -19,15 +19,15 @@ pipe[0] = {
   y: 0
 }
 
-const gap = 90
-let gravitation = 1
+const gap = 120
+let gravitation = 1.5
 let xPos = 10
 let yPos = 150
 
 document.addEventListener('keydown', moveUp)
 
 function moveUp() {
-  yPos -= 20
+  yPos -= 25
 }
 
 function draw() {
@@ -44,6 +44,15 @@ function draw() {
         x: cvs.width,
         y: Math.floor(Math.random() * pipeUp.height) - pipeUp.height
       })
+    }
+
+    // Столкнулись с препятстием?
+    if (xPos + bird.width >= pipe[i].x
+      && xPos <= pipe[i].x + pipeUp.width
+      && (yPos <= pipe[i].y + pipeUp.height
+        || yPos + bird.height >= pipe[i].y + pipeUp.height + gap)
+      || yPos + bird.height >= cvs.height - fg.height) {
+      location.reload()
     }
   }
 
