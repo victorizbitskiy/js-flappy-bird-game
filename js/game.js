@@ -21,6 +21,7 @@ pipe[0] = {
 
 const gap = 120
 let gravitation = 1.5
+let score = 0
 let xPos = 10
 let yPos = 150
 
@@ -54,11 +55,19 @@ function draw() {
       || yPos + bird.height >= cvs.height - fg.height) {
       location.reload()
     }
+
+    if (pipe[i].x === 5) {
+      score++
+    }
   }
 
   ctx.drawImage(fg, 0, cvs.height - fg.height)
   ctx.drawImage(bird, xPos, yPos)
   yPos += gravitation
+
+  ctx.fillStyle = '#fff'
+  ctx.font = '24px Verdana'
+  ctx.fillText(`Score: ${score}`, 10, cvs.height - 20)
   requestAnimationFrame(draw)
 }
 
