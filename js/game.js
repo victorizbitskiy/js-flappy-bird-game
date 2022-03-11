@@ -9,7 +9,7 @@ const pipeBottom = new Image()
 
 bird.src = 'img/bird.png'
 bg.src = 'img/bg.png'
-fg.src = 'img/fg.png'
+// fg.src = 'img/fg.png'
 pipeUp.src = 'img/pipeUp.png'
 pipeBottom.src = 'img/pipeBottom.png'
 
@@ -53,7 +53,8 @@ function draw() {
       && (yPos <= pipe[i].y + pipeUp.height
         || yPos + bird.height >= pipe[i].y + pipeUp.height + gap)
       || yPos + bird.height >= cvs.height - fg.height) {
-      location.reload()
+      // location.reload()
+      window.location = window.location.href;
     }
 
     if (pipe[i].x === 5) {
