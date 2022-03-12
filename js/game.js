@@ -33,12 +33,13 @@ let yPos = 150
 
 document.addEventListener('keydown', moveUp)
 
-function moveUp() {
-  yPos -= 25
-  flyAudio.play();
+let game
+
+function drawLoop() {
+  game = setInterval(draw, 20)
 }
 
-let game = setInterval(draw, 20)
+window.onload = drawLoop
 
 function draw() {
 
@@ -78,4 +79,9 @@ function draw() {
   ctx.fillStyle = '#fff'
   ctx.font = '24px Verdana'
   ctx.fillText(`Score: ${score}`, 10, cvs.height - 20)
+}
+
+function moveUp() {
+  yPos -= 25
+  flyAudio.play();
 }
