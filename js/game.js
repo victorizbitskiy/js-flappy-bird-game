@@ -49,6 +49,7 @@ function draw() {
     ctx.drawImage(pipeBottom, pipe[i].x, pipe[i].y + pipeUp.height + gap)
     pipe[i].x--
 
+    // 
     if (pipe[i].x === 125) {
       pipe.push({
         x: cvs.width,
@@ -56,12 +57,12 @@ function draw() {
       })
     }
 
-    // Столкнулись с препятстием?
+    // Did we crash into a pipe?
     if (xPos + bird.width >= pipe[i].x
       && xPos <= pipe[i].x + pipeUp.width
       && (yPos <= pipe[i].y + pipeUp.height
         || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
-      // Да, столкнулись
+      // Yep
       clearInterval(game)
       location.reload()
     }
