@@ -30,10 +30,9 @@ let gravitation = 1.5
 let score = 0
 let xPos = 10
 let yPos = 150
+let game
 
 document.addEventListener('keydown', moveUp)
-
-let game
 
 function drawLoop() {
   game = setInterval(draw, 20)
@@ -62,6 +61,7 @@ function draw() {
       && xPos <= pipe[i].x + pipeUp.width
       && (yPos <= pipe[i].y + pipeUp.height
         || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
+      // Да, столкнулись
       clearInterval(game)
       location.reload()
     }
