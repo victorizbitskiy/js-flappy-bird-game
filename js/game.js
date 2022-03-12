@@ -9,9 +9,15 @@ const pipeBottom = new Image()
 
 bird.src = 'img/bird.png'
 bg.src = 'img/bg.png'
-// fg.src = 'img/fg.png'
+fg.src = 'img/fg.png'
 pipeUp.src = 'img/pipeUp.png'
 pipeBottom.src = 'img/pipeBottom.png'
+
+const flyAudio = new Audio()
+const scoreAudio = new Audio()
+
+flyAudio.src = "audio/fly.mp3"
+scoreAudio.src = "audio/score.mp3"
 
 const pipe = []
 pipe[0] = {
@@ -19,7 +25,7 @@ pipe[0] = {
   y: 0
 }
 
-const gap = 120
+const gap = 110
 let gravitation = 1.5
 let score = 0
 let xPos = 10
@@ -29,7 +35,10 @@ document.addEventListener('keydown', moveUp)
 
 function moveUp() {
   yPos -= 25
+  flyAudio.play();
 }
+
+let game = setInterval(draw, 20)
 
 function draw() {
 
@@ -51,14 +60,14 @@ function draw() {
     if (xPos + bird.width >= pipe[i].x
       && xPos <= pipe[i].x + pipeUp.width
       && (yPos <= pipe[i].y + pipeUp.height
-        || yPos + bird.height >= pipe[i].y + pipeUp.height + gap)
-      || yPos + bird.height >= cvs.height - fg.height) {
-      // location.reload()
-      window.location = window.location.href;
+        || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
+      clearInterval(game)
+      location.reload()
     }
 
     if (pipe[i].x === 5) {
       score++
+      scoreAudio.play()
     }
   }
 
@@ -69,7 +78,4 @@ function draw() {
   ctx.fillStyle = '#fff'
   ctx.font = '24px Verdana'
   ctx.fillText(`Score: ${score}`, 10, cvs.height - 20)
-  requestAnimationFrame(draw)
 }
-
-pipeBottom.onload = draw
