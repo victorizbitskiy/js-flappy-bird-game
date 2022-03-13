@@ -28,9 +28,17 @@ pipe[0] = {
 const gap = 110
 let gravitation = 1.5
 let score = 0
+let bestScore = 0
 let xPos = 10
 let yPos = 150
 let game
+
+const localStorageRaw = localStorage.getItem('flappyBirdGame')
+const localStorageObject = JSON.parse(localStorageRaw)
+
+if (localStorageObject != null) {
+  bestScore = localStorageObject.bestScore
+}
 
 document.addEventListener('keydown', moveUp)
 
@@ -63,6 +71,10 @@ function draw() {
       && (yPos <= pipe[i].y + pipeUp.height
         || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
       // Yep
+      if (score > bestScore) {
+        bestScore = score
+        localStorage.setItem('flappyBirdGame', JSON.stringify({ bestScore: bestScore }))
+      }
       clearInterval(game)
       location.reload()
     }
@@ -79,7 +91,8 @@ function draw() {
 
   ctx.fillStyle = '#fff'
   ctx.font = '24px Verdana'
-  ctx.fillText(`Score: ${score}`, 10, cvs.height - 20)
+  ctx.fillText(`Score: ${score}`, 10, cvs.height - 50)
+  ctx.fillText(`Best score: ${bestScore}`, 10, cvs.height - 20)
 }
 
 function moveUp() {
