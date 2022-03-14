@@ -41,6 +41,7 @@ if (localStorageObject != null) {
 }
 
 document.addEventListener('keydown', moveUp)
+document.addEventListener('touchstart', moveUp)
 
 function drawLoop() {
   game = setInterval(draw, 20)
