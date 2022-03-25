@@ -13,11 +13,11 @@ fg.src = 'img/fg.png'
 pipeUp.src = 'img/pipeUp.png'
 pipeBottom.src = 'img/pipeBottom.png'
 
-const flyAudio = new Audio()
-const scoreAudio = new Audio()
+// const flyAudio = new Audio()
+// const scoreAudio = new Audio()
 
-flyAudio.src = "audio/fly.mp3"
-scoreAudio.src = "audio/score.mp3"
+// flyAudio.src = "audio/fly.mp3"
+// scoreAudio.src = "audio/score.mp3"
 
 const pipe = []
 pipe[0] = {
@@ -82,7 +82,7 @@ function draw() {
 
     if (pipe[i].x === 5) {
       score++
-      scoreAudio.play()
+//       scoreAudio.play()
     }
   }
 
@@ -98,5 +98,5 @@ function draw() {
 
 function moveUp() {
   yPos -= 25
-  flyAudio.play();
+//   flyAudio.play();
 }
